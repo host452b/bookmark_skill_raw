@@ -1,0 +1,109 @@
+# Godogen: Claude Code skills that build complete Godot 4 projects
+[
+
+](#godogen-claude-code-skills-that-build-complete-godot-4-projects)
+
+[](https://youtu.be/eUz19GROIpY)
+
+[Watch the demos](https://youtu.be/eUz19GROIpY) · [Prompts](/htdt/godogen/blob/master/demo_prompts.md)
+
+You describe what you want. An AI pipeline designs the architecture, generates the art, writes every line of code, captures screenshots from the running engine, and fixes what doesn't look right. The output is a real Godot 4 project with organized scenes, readable scripts, and proper game architecture. Handles 2D and 3D, runs on commodity hardware.
+
+- **Three Claude Code skills** — one orchestrator runs the full pipeline in a single 1M-token context window (planning, building, debugging), while two forked support skills handle Godot API lookup and visual QA without polluting the main context.
+
+- **Godot 4 output** — real projects with proper scene trees, scripts, and asset organization.
+
+- **Asset generation** — Gemini creates precise references and characters; xAI Grok handles textures and simple objects; Tripo3D converts images to 3D models. Animated sprites use Grok video generation with loop detection. Budget-aware: maximizes visual impact per cent spent.
+
+- **C# / .NET 9** — all generated code uses C#. See [why C# over GDScript](/htdt/godogen/blob/master/gdscript-vs-csharp.md).
+
+- **Visual QA closes the loop** — captures actual screenshots from the running game and analyzes them with Gemini Flash and Claude vision. Includes question mode for free-form visual debugging. Catches z-fighting, missing textures, broken physics.
+
+- **Runs on commodity hardware** — any PC with Godot and Claude Code works.
+
+- [Godot 4](https://godotengine.org/download/) (headless or editor) on `PATH`
+
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed
+
+- API keys as environment variables:
+
+`GOOGLE_API_KEY` — [Google AI Studio](https://aistudio.google.com/), used for Gemini image generation (references, characters, precise work)
+
+- `XAI_API_KEY` — [xAI Grok](https://console.x.ai/home), used for image/video generation (textures, simple objects)
+
+- `TRIPO3D_API_KEY` — [Tripo3D](https://platform.tripo3d.ai/), used for image-to-3D model conversion (only needed for 3D games)
+
+- Python 3 with pip (asset tools install their own deps)
+
+- System packages: `mesa-utils`, `ffmpeg` (see [setup.md](/htdt/godogen/blob/master/setup.md) for full details including macOS)
+
+- Tested on Ubuntu, Debian, and macOS.
+
+This repo is the skill development source. To start making a game, run `publish.sh` to set up a new project folder with all skills installed:
+
+./publish.sh ~/my-game
+./publish.sh --force ~/my-game  # clean existing target before publishing
+
+This creates the target directory with `.claude/skills/` and a `CLAUDE.md`, then initializes a git repo. Open Claude Code in that folder and tell it what game to make — the `/godogen` skill handles everything from there.
+
+A single generation run can take several hours. Running on a cloud VM keeps your local machine free and gives the pipeline a GPU for Godot's screenshot capture. A basic GCE instance with a T4 or L4 GPU works well.
+
+You don't need to keep a terminal open for the entire run. Connect a [channel](https://code.claude.com/docs/en/channels#quickstart) (Telegram, Slack, etc.) to send prompts and receive progress updates from your phone, or use [remote control](https://code.claude.com/docs/en/remote-control) to manage sessions from any browser.
+
+After a full generation session, ask Claude to review how the pipeline performed:
+
+Analyze this session. Were all skill instructions optimal? Flag anything that was too obvious (handholding that wasted context), missing (you had to search for something the skills should have told you), or misleading. Did any tools pollute context with noise that should run in a sub-agent? Did you use the GPU? Any tool failures or workarounds?
+
+Then use the feedback to improve the skills in this repo. Contributions welcome — open an issue with what you found.
+## Is Claude Code the only option?
+[
+
+](#is-claude-code-the-only-option)
+
+The skills were tested across different setups. Claude Code with Opus 4.6 delivers the best outcome. Sonnet 4.6 works but requires more guidance from the user. [OpenCode](https://opencode.ai/) was quite nice and porting the skills is straightforward — I'd recommend it if you're looking for an alternative.
+
+- Publish a full game end-to-end as a public demo
+
+- Explore Bevy Engine as Godot alternative
+
+**2026-04-06 — C# migration** (current)
+
+- All skills and generated code migrated from GDScript to C# / .NET 9 ([comparison](/htdt/godogen/blob/master/gdscript-vs-csharp.md))
+
+- Eliminates GDScript's Variant type inference errors — compiler catches mistakes before runtime
+
+- `dotnet build` replaces per-file `--check-only` validation
+
+**2026-04-03 — Single-context architecture**
+
+- Merged task executor into godogen — full pipeline runs in one 1M-token context window
+
+- Added godot-api skill (forked, Sonnet) for Godot class API lookup
+
+- Added visual-qa skill (forked) with Gemini Flash, Claude vision, and question mode
+
+- Risk-first decomposition replaces task DAG
+
+- Android debug APK export
+
+**2026-03-25 — xAI Grok video**
+
+- Added xAI Grok video generation for animated sprites (ref → pose → video → frames → loop trim)
+
+- Background removal rewritten with BiRefNet multi-signal matting
+
+- macOS support, native channel status updates
+
+**2026-03-09 — Initial release**
+
+- Two-skill architecture: godogen orchestrator + godot-task executor (forked)
+
+- Gemini image generation, Tripo3D for 3D models
+
+- Visual QA via Gemini Flash
+
+- Screenshot and video capture, presentation video
+
+- GDScript reference system with lazy two-tier API lookup
+
+Follow progress: [@alex_erm](https://x.com/alex_erm)
