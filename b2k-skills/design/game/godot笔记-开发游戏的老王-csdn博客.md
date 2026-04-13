@@ -1,0 +1,35 @@
+---
+name: "Godot笔记_开发游戏的老王-CSDN博客"
+description: "Title: Godot笔记_开发游戏的老王的博客-CSDN博客"
+url: "https://blog.csdn.net/ttm2d/category_9311021.html?spm=1001.2014.3001.5482"
+category: "design/game"
+content_type: "technical-article"
+tags: ["design", "game"]
+key_claims:
+  - "Title: Godot笔记_开发游戏的老王的博客-CSDN博客"
+taste_signals:
+reuse_contexts:
+  - situation: "讨论 Godot笔记"
+    how: "引用核心论点和案例"
+quality_score:
+  depth: 4
+  originality: 1
+  practicality: 3
+  writing: 2
+---
+
+## Summary
+
+Title: Godot笔记_开发游戏的老王的博客-CSDN博客
+
+## Key Insights
+- Godot笔记
+- 作者:  开发游戏的老王
+
+## Concrete Examples
+- *   [## Godot Engine:用着色器实现通过开关隐藏部分模型 使用情景代码很简单。这个着色器可以用在动画的开发流程中，比如游戏角色要持各种枪，在Blender中作动画时，可以给手上添加一个临时的简模（一个Cube）当作枪，这样比较方便做动画，这个简模上使用下面的着色器材质。在游戏运行时，将它隐藏掉，真正的枪则通过BoneAttachment动态添加上去。这样就非常灵活了。着色器sha
+- *   [## 【手把手带你Godot游戏开发 第二弹】名场面临摹 之 街霸3D（本文荣获1024程序员节【最技术奖】） 前言完成了《【手把手带你Godot游戏开发 第一弹】零基础入门案例：FlappyBird》，有小伙伴问有没有第二弹，一时冲动承诺来个3D大作临摹真·全流程，结果做着做着发现这个真是一个工作量巨大的教程，然而，自己挖的坑，流着泪也要填上！你们要的，第二弹的街霸3D名场景临摹，终于
+- *   [## Godot Engine：格斗游戏中的必杀技（大招/绝招/特殊技/Special Move ）输入系统实现 前言必杀技系统是格斗游戏中必不可少的元素，要触发角色的必杀技，必须在一个很短的时间内，准确无误地输入一个按键序列，比如下表中街霸角色隆的部分必杀技：波动拳 下，前，拳升龙拳前，下，前，拳在上表中不难发现波动拳的下，前，拳是升龙拳前，下，前，拳的子序列 原创 2020-10-2
+
+## When To Reference
+- **讨论 Godot笔记** → 引用核心论点和案例

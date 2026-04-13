@@ -1,1 +1,0 @@
-Chrome Experiments is a showcase of work by coders who are pushing the boundaries of web technology, creating beautiful, unique web experiences. You'll find helpful links throughout the site for creating your own experiments, and you can also explore resources like WebGL Globe and our workshop of tools.

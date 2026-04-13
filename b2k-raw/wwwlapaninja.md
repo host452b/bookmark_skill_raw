@@ -1,1 +1,0 @@
-Lapa Ninja offers over 7,300 landing page designs since 2015, along with 15,000+ full-page website screenshots. Discover inspiration from real examples, complete with full website screenshots and video recordings. Enjoy unlimited access to website categories, past versions, filtering, and search results.
